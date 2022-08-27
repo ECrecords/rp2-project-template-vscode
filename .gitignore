@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# CMake Generated Builds
+build/
+
+# VSCode Cortex Debug files
+.vscode/.cortex-debug.peripherals.state.json
+.vscode/.cortex-debug.registers.state.json

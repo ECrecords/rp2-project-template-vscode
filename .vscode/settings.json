@@ -15,5 +15,6 @@
     },
     "cmake.buildBeforeRun": true,
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "cortex-debug.openocdPath": "/home/elvis/pico-dev/openocd/src/openocd"
+    // Path to Raspberry Pi Pico OpenOCD exectuable (.exe or linux binary)
+    "cortex-debug.openocdPath": "[/home/elvis/pico-dev/openocd/src/openocd]"
 }
