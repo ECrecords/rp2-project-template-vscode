@@ -11,16 +11,17 @@ The following instructions pertain to Linux (Ubuntu 22.04.1).
     - pico-sdk
     - openocd
     - picobrobe
-3. Build OpenOCD.
-4. Build picobrobe and upload uf2 to RP2 to be used for debugging.
-5. In you project's `CMakeLists.txt`, disable usb and enable uart for stdio binding.
+3. Make sure environment variable `PICO_SDK_PATH` is defined and points to pico-sdk.
+4. Build OpenOCD.
+5. Build picobrobe and upload uf2 to RP2 to be used for debugging.
+6. In you project's `CMakeLists.txt`, disable usb and enable uart for stdio binding.
     ```
     # enable/disable usb and uart output
     pico_enable_stdio_usb(${PROJECT_NAME} 0)
     pico_enable_stdio_uart(${PROJECT_NAME} 1)
     ```
-6. Create a `.vscode` directory and files: `launcch.json` and `settings.json`.
-7. Fill in the following JSON field that correspond to your installation locations.
+7. Create a `.vscode` directory and files: `launcch.json` and `settings.json`.
+8. Fill in the following JSON field that correspond to your installation locations.
     - `launch.json`
     ```
     // This may need to be arm-none-eabi-gdb depending on your system
@@ -35,11 +36,11 @@ The following instructions pertain to Linux (Ubuntu 22.04.1).
     // Path to Raspberry Pi Pico OpenOCD exectuable (.exe or linux binary)
     "cortex-debug.openocdPath": "[~/pico-dev/openocd/src/openocd]"
     ```
-8. Add RP2 Picoprobe to udev rules.
-```
-echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0004", GROUP="users", MODE="0666"' | sudo tee -a /etc/udev/rules.d/98-PicoProbe.rules
+9. Add RP2 Picoprobe to udev rules.
+    ```
+    echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0004", GROUP="users", MODE="0666"' | sudo tee -a /etc/udev/rules.d/98-PicoProbe.rules
 
-sudo udevadm control --reload
-```
-9. Reboot
-10. Your done, happy developing!
+    sudo udevadm control --reload
+    ```
+10. Reboot
+11. Your done, happy developing!
