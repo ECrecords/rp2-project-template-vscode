@@ -1,6 +1,6 @@
 # VSCode Template for RP2 Project with Debugging
 
-This template is meant to be used in the development of application utilizing the Raspberry Pi Pico microcontroller board.  
+This template is meant to be used in the development of applications utilizing the Raspberry Pi Pico microcontroller board.  
 
 The debugging capabilities are provided by using a seperate RP2 loaded with the **picoprobe** firmware.
 
@@ -14,13 +14,27 @@ The following instructions pertain to Linux (Ubuntu 22.04.1).
 3. Build OpenOCD.
 4. Build picobrobe and upload uf2 to RP2 to be used for debugging.
 5. In you project's `CMakeLists.txt`, disable usb and enable uart for stdio binding.
-```
-# enable/disable usb and uart output
-pico_enable_stdio_usb(${PROJECT_NAME} 0)
-pico_enable_stdio_uart(${PROJECT_NAME} 1)
-```
+    ```
+    # enable/disable usb and uart output
+    pico_enable_stdio_usb(${PROJECT_NAME} 0)
+    pico_enable_stdio_uart(${PROJECT_NAME} 1)
+    ```
 6. Create a `.vscode` directory and files: `launcch.json` and `settings.json`.
 7. Fill in the following JSON field that correspond to your installation locations.
+    - `launch.json`
+    ```
+    // This may need to be arm-none-eabi-gdb depending on your system
+    "gdbPath" : "gdb-multiarch",
+    
+    ...
+
+    "searchDir": ["~/elvis/pico-dev/openocd/tcl"],
+    ```
+    - `settings.json`
+    ```
+    // Path to Raspberry Pi Pico OpenOCD exectuable (.exe or linux binary)
+    "cortex-debug.openocdPath": "[~/pico-dev/openocd/src/openocd]"
+    ```
 8. Add RP2 Picoprobe to udev rules.
 ```
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0004", GROUP="users", MODE="0666"' | sudo tee -a /etc/udev/rules.d/98-PicoProbe.rules
